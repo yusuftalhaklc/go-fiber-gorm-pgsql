@@ -3,8 +3,9 @@ package handler
 import (
 	"go-fiber/database"
 	"go-fiber/model"
+	"go-fiber/util"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
 
@@ -17,6 +18,8 @@ func CreateUser(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Something's wrong with your input", "data": err})
 	}
+
+	user.Password = util.HashPassword(user.Password)
 	err = db.Create(&user).Error
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Could not create user", "data": err})
