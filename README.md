@@ -37,6 +37,13 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
 - **Method:** `GET`
 - **Description:** Get a single user by ID.
 
+### Login 
+
+- **Endpoint:** `/api/user/login`
+- **Method:** `POST`
+- **Description:** Login.
+
+
 ### Create User
 
 - **Endpoint:** `/api/user`
@@ -91,6 +98,27 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
     ],
     "message": "Users Found",
     "status": "sucess"
+}
+```
+
+### Login
+- Request
+```http
+POST /api/user/login
+```
+
+```json
+{
+    "username":"username",
+    "password":"password123"
+}
+```
+
+- Response
+```json
+{
+    "message": "Login successfully",
+    "status": "success"
 }
 ```
 ### Get All User
