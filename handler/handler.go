@@ -4,6 +4,7 @@ import (
 	"go-fiber/database"
 	"go-fiber/model"
 	"go-fiber/util"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
@@ -34,9 +35,17 @@ func GetAllUsers(c *fiber.Ctx) error {
 	var users []model.User
 
 	db.Find(&users)
-
 	if len(users) == 0 {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Users not found", "data": nil})
+	}
+
+	token := c.Get("Authorization")
+	if token == "" {
+		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "invalid Token"})
+	}
+	_, err := util.VerifyToken(token)
+	if err != nil {
+		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Unauthorized"})
 	}
 
 	return c.Status(200).JSON(fiber.Map{"status": "sucess", "message": "Users Found", "data": users})
@@ -126,5 +135,12 @@ func LoginUser(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "User not found", "data": nil})
 	}
 
-	return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Login succesfuly"})
+	tokenString, err := util.CreateToken(&user)
+	if err != nil {
+		log.Println(tokenString)
+		log.Println(err)
+		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Server Error"})
+	}
+
+	return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Login succesfuly", "token": tokenString})
 }
