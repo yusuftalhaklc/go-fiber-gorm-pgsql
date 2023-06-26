@@ -22,6 +22,8 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
   go run main.go
   ```
 
+**It is currently running on localhost port 8080.** [Postman Collection](https://red-shuttle-655108.postman.co/workspace/go-fiber-gorm-pgsq~0fdd766c-93af-42a4-812b-f426fd8a91e0/collection/27159195-1c71ffe2-1f00-4958-990e-6d0988fa3c4e?action=share&creator=27159195)
+
 ## API Endpoints
 ### Get All Users
 
