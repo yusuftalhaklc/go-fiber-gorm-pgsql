@@ -67,17 +67,28 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
 - Response
 ```json
 {
-    "data": {
-        "CreatedAt": "2023-06-26T11:33:44.674928+03:00",
-        "UpdatedAt": "2023-06-26T11:33:44.674928+03:00",
-        "DeletedAt": null,
-        "ID": "f907c118-b2df-4920-9f04-6d13c96b355c",
-        "username": "username",
-        "email": "username@example.com",
-        "password": "password123"
-    },
-    "message": "User has created",
-    "status": "success"
+    "data": [
+        {
+            "CreatedAt": "2023-06-26T11:46:46.46791+03:00",
+            "UpdatedAt": "2023-06-26T11:46:46.46791+03:00",
+            "DeletedAt": null,
+            "ID": "f907c118-b2df-4920-9f04-6d13c96b355c",
+            "username": "username",
+            "email": "username@example.com",
+            "password": "password123"
+        },
+        {
+            "CreatedAt": "2023-06-26T11:46:52.784047+03:00",
+            "UpdatedAt": "2023-06-26T11:46:52.784047+03:00",
+            "DeletedAt": null,
+            "ID": "2e723e10-0a12-42ee-ac46-a9e268ebb66e",
+            "username": "username2",
+            "email": "username2@example.com",
+            "password": "password456"
+        }
+    ],
+    "message": "Users Found",
+    "status": "sucess"
 }
 ```
 ### Get All User
