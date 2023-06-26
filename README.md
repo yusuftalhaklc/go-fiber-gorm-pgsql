@@ -29,6 +29,7 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
 
 - **Endpoint:** `/api/user`
 - **Method:** `GET`
+- **Authorization:**  Token
 - **Description:** Get all users.
 
 ### Get Single User
@@ -84,7 +85,7 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
             "ID": "f907c118-b2df-4920-9f04-6d13c96b355c",
             "username": "username",
             "email": "username@example.com",
-            "password": "password123"
+            "password": "4ee1d94f2cc476688105a776dcc6d36c32ad00aa68b901baeff71b115676f45d"
         },
         {
             "CreatedAt": "2023-06-26T11:46:52.784047+03:00",
@@ -93,7 +94,7 @@ Go Fiber Example API is a RESTful API built using the Fiber web framework.
             "ID": "2e723e10-0a12-42ee-ac46-a9e268ebb66e",
             "username": "username2",
             "email": "username2@example.com",
-            "password": "password456"
+            "password": "7772448cf067ba366d81d3133feb61e449e65e3e6d516371cb2754e329c691b4"
         }
     ],
     "message": "Users Found",
@@ -117,8 +118,9 @@ POST /api/user/login
 - Response
 ```json
 {
-    "message": "Login successfully",
-    "status": "success"
+    "message": "Login succesfuly",
+    "status": "success",
+    "token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODc3ODE3MzksImlkIjoiZDk3MmE0NWEtNTNiZC00ODgwLTgwODktZDk1NDlkMzRhMzQ4IiwidXNlcm5hbWUiOiJ1c2VybmFtZTEyMyJ9.TjRCOKgQwGylLzOQ0kG3Qrk1ySOGZnGfa8SWPZHV-ZXNfucJcBV9Y4ysirFj2GXyxH1ybgZ6BME50E3HrsaPIA"
 }
 ```
 ### Get All User
@@ -137,7 +139,7 @@ GET /api/users
             "ID": "f907c118-b2df-4920-9f04-6d13c96b355c",
             "username": "username",
             "email": "username@example.com",
-            "password": "password123"
+            "password": "4ee1d94f2cc476688105a776dcc6d36c32ad00aa68b901baeff71b115676f45d"
         }
     ],
     "message": "Users Found",
@@ -159,7 +161,7 @@ GET /api/user/f907c118-b2df-4920-9f04-6d13c96b355c
         "ID": "f907c118-b2df-4920-9f04-6d13c96b355c",
         "username": "username",
         "email": "username@example.com",
-        "password": "password123"
+        "password": "4ee1d94f2cc476688105a776dcc6d36c32ad00aa68b901baeff71b115676f45d"
     },
     "message": "User Found",
     "status": "success"
@@ -187,7 +189,7 @@ PUT /api/user/f907c118-b2df-4920-9f04-6d13c96b355c
         "ID": "f907c118-b2df-4920-9f04-6d13c96b355c",
         "username": "yusuftalhaklc",
         "email": "username@example.com",
-        "password": "password123"
+        "password": "4ee1d94f2cc476688105a776dcc6d36c32ad00aa68b901baeff71b115676f45d"
     },
     "message": "users Found",
     "status": "success"
