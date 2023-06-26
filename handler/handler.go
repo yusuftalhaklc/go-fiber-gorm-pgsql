@@ -57,7 +57,7 @@ func GetSingleUser(c *fiber.Ctx) error {
 }
 
 func UpdateUser(c *fiber.Ctx) error {
-	type updateUser struct {
+	type UpdateUser struct {
 		Username string `json:"username"`
 	}
 
@@ -71,7 +71,7 @@ func UpdateUser(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "User not found", "data": nil})
 	}
 
-	var updateUserData updateUser
+	var updateUserData UpdateUser
 	err := c.BodyParser(&updateUserData)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Something's wrong with your input", "data": err})
@@ -101,4 +101,30 @@ func DeleteUserByID(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Failed to delete user", "data": nil})
 	}
 	return c.Status(200).JSON(fiber.Map{"status": "success", "message": "User deleted"})
+}
+
+func LoginUser(c *fiber.Ctx) error {
+	type LoginUser struct {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	var login LoginUser
+	db := database.DB.DB
+	var user model.User
+
+	err := c.BodyParser(&login)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Something's wrong with your input", "data": err})
+	}
+
+	db.Find(&user, "username = ?", login.Username)
+	if user.ID == uuid.Nil {
+		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "User not found", "data": nil})
+	}
+
+	if !(util.VerifyPassword(login.Password, user.Password)) {
+		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "User not found", "data": nil})
+	}
+
+	return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Login succesfuly"})
 }
